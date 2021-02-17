@@ -6,19 +6,15 @@ def cats(image_name):
 
     ## read image
     image = cv.imread(image_name)
-    ## cv.imshow("-1", image)
 
     ## rescale image to abide by max aspect ratios
     image = cats_toolbox.rescale(image)
-    ## cv.imshow("0", image)
 
     ## find cats
     cats = cats_toolbox.find_cats(image)
-    ## cv.imshow("1", image)
 
     ## mark the cats
     image = cats_toolbox.draw_rectangles(image, cats)
-    ## cv.imshow("2", image)
 
     ## create label
     label = ""
@@ -33,15 +29,22 @@ def cats(image_name):
     cv.waitKey(0)
 
 
-numberstring = "01234"
-cat_string = "images/cat0.jpg"
-not_cat_string = "images/notcat0.jpg"
+def main():
+    "A quick temporary test function for the program"
 
-for i in range(0, 5):
-    if i != 0:
-        cat_string = cat_string.replace(numberstring[i-1], numberstring[i])
-        not_cat_string = not_cat_string.replace(numberstring[i-1], numberstring[i])
+    ## The images are named in the format seen on the initialisation strings below.
+    ## Iterate through all the images in the image folder by changing the file name using string operations.
+    ## Currently the image folder has 5 images of cats and 5 of not cats.
+    cat_string = "images/cat0.jpg"
+    not_cat_string = "images/notcat0.jpg"
+
+    for i in range(0, 5):
+        if i != 0:
+            cat_string = cat_string.replace(str(i-1), str(i))
+            not_cat_string = not_cat_string.replace(str(i-1), str(i))
+        
+        cats(cat_string)
+        cats(not_cat_string)
     
-    cats(cat_string)
-    cats(not_cat_string)
-    
+if __name__ == "__main__":
+    main()
